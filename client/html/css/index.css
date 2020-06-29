@@ -3,17 +3,18 @@ section{width:100%;height:100%;overflow:hidden;position:absolute;top:0;left:0;}
 aside{position:fixed;top:0;left:0;width:100%;height:100%;z-index:19;background-color:rgba(0,0,0,0.85);}
 .hide{display: none;}
 
+section.commonPage{opacity: 0;pointer-events: none;transition: all .3s;}
+section.commonPage.active{opacity: 1;pointer-events: all;}
+
 /* .initPage */
-.initPage{opacity: 0;pointer-events: none;transition: all .3s;}
-.initPage.show{opacity: 1;pointer-events: all;}
-.initPage .video{width:100%;height:100%;object-fit: cover;}
-.btn{width: 2.20rem;height: .74rem;background-image: url(../images/index/btn_play.png);position: absolute;left: 50%;bottom: 1.75rem;margin-left: -1.1rem;}
+section.initPage .video{width:100%;height:100%;object-fit: cover;}
+section.initPage .btn{width: 2.20rem;height: .74rem;background-image: url(../images/index/btn_play.png);position: absolute;left: 50%;bottom: 1.75rem;margin-left: -1.1rem;}
 
 /* btnPointer */
-.initPage .btnPointer{width: 2rem;height: 2rem;position: absolute;top: 7.6rem;left: 50%;margin-left: -1rem;}
-.initPage .btnPointer .box{width: 100%;height: 100%;position: absolute;top: 0;left: 0;}
-.initPage .btnPointer .circleBox{width: 100%;height: 100%;position: absolute;top: 0;left: 0;border-radius: 50%;background-color: rgba(255,255,255,0.3);animation: light_circle 1.2s linear infinite alternate;transform-origin: center;}
-.initPage .btnPointer .inset{width: 1.27rem;height: 1.27rem;position: absolute;top: 50%;left: 50%;margin-left: -0.635rem;margin-top: -0.635rem;border-radius: 50%;background-color: rgba(255,255,255,0.7);animation: light_circle 1.2s linear infinite alternate;transform-origin: center;}
+section.initPage .btnPointer{width: 2rem;height: 2rem;position: absolute;top: 7.6rem;left: 50%;margin-left: -1rem;}
+section.initPage .btnPointer .box{width: 100%;height: 100%;position: absolute;top: 0;left: 0;}
+section.initPage .btnPointer .circleBox{width: 100%;height: 100%;position: absolute;top: 0;left: 0;border-radius: 50%;background-color: rgba(255,255,255,0.3);animation: light_circle 1.2s linear infinite alternate;transform-origin: center;}
+section.initPage .btnPointer .inset{width: 1.27rem;height: 1.27rem;position: absolute;top: 50%;left: 50%;margin-left: -0.635rem;margin-top: -0.635rem;border-radius: 50%;background-color: rgba(255,255,255,0.7);animation: light_circle 1.2s linear infinite alternate;transform-origin: center;}
 
 
 @-webkit-keyframes light_circle{
@@ -34,9 +35,150 @@ aside{position:fixed;top:0;left:0;width:100%;height:100%;z-index:19;background-c
   }
 }
 
+
+/* heartbox */
+section.initPage .heartbox{width: .82rem;height: .71rem;position: absolute;border-radius: 100%;top: .18rem;left: 0;opacity: 0;}
+section.initPage .heartcont {width: 100%;height: 100%;}
+section.initPage .heartbox .i_heart{width: .82rem;height: .71rem; position: absolute;left: 0;top:0;right: 0;bottom: 0;margin: auto; opacity: 0;}
+section.initPage .heartbox .i_heart1{width: 100%;height: 100%;}
+section.initPage .heart_on .i_heart1{animation:ani_heart2 1.5s 1s linear 1 forwards;transform-origin:top ;}
+section.initPage .heart_on .i_heart2{animation:ani_heart2 1.5s 1s linear 1 forwards;transform-origin:top ;}
+section.initPage .heart_on .i_heart3{animation:ani_heart3 2.3s .2s linear 1 forwards;transform-origin:top ;}
+section.initPage .heart_on .i_heart4{animation:ani_heart4 2.1s .3s linear 1 forwards;transform-origin:top ;}
+section.initPage .heart_on .i_heart5{animation:ani_heart5 1.9s .4s linear 1 forwards;transform-origin:top ;}
+section.initPage .heart_on .i_heart6{animation:ani_heart6 1.7s .5s linear 1 forwards;transform-origin:top ;}
+section.initPage .heart_on .i_heart7{animation:ani_heart7 1.8s .6s linear 1 forwards;transform-origin:top ;}
+section.initPage .heart_on .i_heart8{animation:ani_heart8 2.2s .7s linear 1 forwards;transform-origin:top ;}
+section.initPage .heart_on .i_heart9{animation:ani_heart7 2.3s .8s linear 1 forwards;transform-origin:top ;}
+
+@keyframes ani_heart1{
+0%{opacity:0}
+10%{opacity:1}
+50%{opacity:1;transform:scale(1.2);}
+100%{opacity:0;transform:scale(1);}
+}
+@keyframes ani_heart2{
+  0%{opacity:0}
+  10%{opacity:1; }
+  50%{opacity:.5;transform:scale(0.5) rotate(6deg) translate(40px,-200px);}
+  100%{opacity:0;transform:scale(0.35) rotate(-6deg) translate(-40px,-400px);}
+}
+@keyframes ani_heart3{
+    0%{opacity:0}
+    10%{opacity:1; }
+    50%{opacity:.5;transform:scale(0.5) rotate(-6deg) translate(50px,-200px);}
+    100%{opacity:0;transform:scale(0.35) rotate(6deg) translate(-50px,-400px);}
+}
+@keyframes ani_heart4{
+    0%{opacity:0}
+    10%{opacity:1}
+    50%{opacity:.5;transform:scale(0.5) rotate(-12deg) translate(-40px,-200px);}
+    100%{opacity:0;transform:scale(0.35) rotate(12deg) translate(40px,-400px);}
+}
+
+@keyframes ani_heart5{
+    0%{opacity:0}
+    10%{opacity:1}
+    50%{opacity:.5;transform:scale(0.5) rotate(-9deg) translate(20px,-200px);}
+    100%{opacity:0;transform:scale(0.35) rotate(9deg) translate(-20px,-400px);}
+}
+@keyframes ani_heart6{
+    0%{opacity:0}
+    10%{opacity:1}
+    50%{opacity:.5;transform:scale(0.75) rotate(3deg) translate(30px,-200px);}
+    100%{opacity:0;transform:scale(0.5) rotate(-9deg) translate(-30px,-400px);}
+}
+
+@keyframes ani_heart7{
+    0%{opacity:0}
+    10%{opacity:1}
+    100%{opacity:0;transform:scale(0.5) rotate(-8deg) translate(-40px,-400px);}
+}
+@keyframes ani_heart8{
+    0%{opacity:0}
+    10%{opacity:1}
+    100%{opacity:0;transform:scale(0.5) rotate(2deg) translate(10px,-400px);}
+}
+
+/* barragePage */
+section.barragePage .axisBox{width: 100%;height: 100%;position: absolute;top: 0;left: 0;}
+section.barragePage .axisBox .item{height: .84rem;position: absolute;bottom: 0;left: 0;}
+
+
+/* owerHoneyedPage */
+.borderBox{width: 6.37rem;height: 11.83rem;background-image: url(../images/index/border.png);padding: .27rem .22rem; position: absolute;top: 50%;left: 50%;margin-left: -3.185rem;margin-top: -5.915rem;}
+.borderBox img{display: block;}
+.borderBox .insetBox{width: 100%;height: 100%;padding-top: .54rem;}
+.borderBox .insetBox .close{width: .45rem;height: .45rem;background-image: url(../images/common/close.png);position: absolute;top: .11rem;right: .16rem;z-index: 12;}
+.borderBox .insetBox .logo{width: 2.33rem;height: .65rem;background-image: url(../images/index/logo.png);margin: 0 auto .6rem;}
+.borderBox .insetBox .titleBox {width: 4.8rem;margin: 0 auto;}
+.borderBox .insetBox .titleBox .top{width: 3.12rem;height: 1.14rem;background-image: url(../images/index/titBorder.png);margin: 0 auto;text-align: center;padding-top: .53rem;}
+.borderBox .insetBox .titleBox .top>img{width: 1.97rem;margin: 0 auto;}
+.borderBox .insetBox .titleBox .bottom{width: 100%;height: 2rem;margin: 0 auto;}
+.borderBox .insetBox .titleBox .bottom>img{width: 100%;}
+.borderBox .insetBox .titleBox .bottom::before{content: '';width: 2.03rem;height: 0.02rem;background-image: url(../images/index/line.png);background-position: 50% 50%; background-repeat: no-repeat; background-size:100% 100%;position: absolute;left: 50%;bottom: 0;transform: translateX(-50%);}
+.borderBox .insetBox .recommendBox{padding-top: .8rem;}
+.borderBox .insetBox .recommendBox .tit2{width: 3.7rem;height: 0.28rem;background-image: url(../images/index/tit2.png);margin: 0 auto;}
+.borderBox .insetBox .recommendBox .boxCon{width: 3.35rem;height: 3.75rem;margin: .4rem auto 0;}
+.borderBox .insetBox .recommendBox .boxCon>img{width: 100%;}
+.borderBox .insetBox .recommendBox .boxCon.boxCon1>img{margin-left: -.25rem;}
+
+section.owerHoneyedPage{background-color: rgba(0,0,0,0.5);}
+section.owerHoneyedPage.active .borderBox .insetBox .recommendBox .boxCon{animation: ani_package 1.2s linear forwards;}
+
+@keyframes ani_package{
+  0%{opacity:0}
+  10%{opacity:1}
+  50%{opacity:1;transform:scale(1.2);}
+  100%{opacity:1;transform:scale(1);}
+  }
+
+/* buyPage */
+section.buyPage{background-color: rgba(0,0,0,0.5);}
+section.buyPage .borderBox .insetBox .titleBox .top{width: 3.12rem;height: 1.18rem;background-image: url(../images/index/titBorder2.png);}
+section.buyPage .borderBox .insetBox .recommendBox{padding-top: .3rem;}
+section.buyPage .borderBox .insetBox .recommendBox .boxCon{margin-top: 0;}
+section.buyPage .borderBox .insetBox .recommendBox .tit2{width: 2.73rem;height: 0.34rem;background-image: url(../images/index/tit3.png);margin-top: .5rem;}
+section.buyPage .borderBox .insetBox .btnBox{width: 5.13rem;height: .74rem;display: flex;justify-content: space-between;align-items: center;margin: 1.28rem auto 0;}
+section.buyPage .borderBox .insetBox .btnBox .btn{width: 2.20rem;height: .74rem}
+section.buyPage .borderBox .insetBox .btnBox .btn:first-child{background-image: url(../images/index/btn_share.png);}
+section.buyPage .borderBox .insetBox .btnBox .btn:last-child{background-image: url(../images/index/btn_buy2.png);}
+
+section.buyPage.active .borderBox .insetBox .recommendBox .boxCon{animation: ani_package 1.2s linear forwards;}
+
+/* sharePage */
+section.sharePage{background-color: rgba(0,0,0,0.5);pointer-events: none;}
+section.sharePage .borderBox .insetBox .titleBox .top{width: 3.12rem;height: 1.18rem;background-image: url(../images/index/titBorder2.png);}
+section.sharePage .borderBox .insetBox .recommendBox{padding-top: .3rem;pointer-events: none;}
+section.sharePage .borderBox .insetBox .recommendBox .boxCon{margin-top: 0;}
+section.sharePage .borderBox .insetBox .recommendBox .tit2{width: 3.97rem;height: 0.65rem;background-image: url(../images/index/tit4.png);margin-top: .35rem;}
+section.sharePage .borderBox .insetBox .codeBox{width: 3.08rem;height: 3.08rem;margin: -.2rem auto 0;pointer-events: none;}
+section.sharePage .borderBox .insetBox .codeBox>img.code{width: 100%;-mix-blend-mode: multiply;}
+section.sharePage .borderBox .insetBox .codeBox>img.tipSave{width: 2.53rem;position: absolute;top: 2.8rem;left: 0;right: 0;margin: auto;}
+
+/* canvasBox */
+section.sharePage .canvasBox{background-color: rgba(0,0,0,0.5);transform: scale(1)!important;left: -9999px;}
+section.sharePage .canvasBox,
+section.sharePage .canvasBox .insetBox .logo,
+section.sharePage .canvasBox .insetBox .titleBox .top,
+section.sharePage .canvasBox .insetBox .recommendBox .tit2{background-image: none;}
+section.sharePage .canvasBox .insetBox .codeBox{margin-top: 0;}
+section.sharePage .canvasBox .bg{width: 100%;height: 100%;position: absolute;top: 0;left: 0;}
+section.sharePage .canvasBox .insetBox .titleBox .top{padding-top: 0;}
+
+
+/* imgCombine */
+section.imgCombine{background-color: transparent;opacity: 0;z-index: 11;display: none;width: 100%;height: 100%;position: absolute;top: 0;left: 0;}
+section.imgCombine>img{width: 100%;height: 100%;object-fit: cover;}
+
 /*---------------------------------------- 15:9 ----------------------*/
 
 /*.screen159  .pic{margin-top: -.8rem;}*/
+.screen159 .borderBox{transform: scale(0.95);}
+
+/*---------------------------------------- screenNormal ----------------------*/
+
+.screenNormal .borderBox{transform: scale(0.95);}
 
 /*---------------------------------------- 18:9 ----------------------*/
 /*.screen189  .btn1{margin:.6rem auto 0;}*/

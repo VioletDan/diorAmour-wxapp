@@ -4,7 +4,8 @@
 <head>
     <title></title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport"
+        content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="format-detection" content="telephone=no" />
     <meta name="format-detection" content="email=no" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
@@ -24,27 +25,142 @@
 <body>
     <!--------------------------------------------------------------html区域-------------------------------------------------------------------------------------------->
     <article style="display: none;">
-        <section class="initPage show">
-            <video id="video" src="https://uat.beats-digital.com/viola/video/v1.mp4" class="video" preload="auto" x-webkit-airplay="true" webkit-playsinline="true" playsinline="" x5-video-player-type="h5" x5-video-player-fullscreen="true" src="" poster="images/index/langBg.jpg"></video>
+        <section class="commonPage initPage active" id="initPage">
+            <video id="video" src="https://uat.beats-digital.com/viola/video/v1.mp4" class="video" preload="auto"
+                x-webkit-airplay="true" webkit-playsinline="true" playsinline="" x5-video-player-type="h5"
+                x5-video-player-fullscreen="true" src="" poster="images/index/langBg.jpg"></video>
             <div class="btn btnPlay" id="btnPlay"></div>
-            <div class="btnPointer">
+            <div class="btnPointer hide" id="btnPointer">
                 <div class="box">
                     <div class="circleBox"></div>
                     <div class="inset"></div>
                 </div>
-                <div class="heartBox">
-                     
+                <div class="heartbox">
+                    <div class="heartcont heart_off">
+                        <img class="i_heart i_heart1" src="images/common/icon_heart.png">
+                        <img class="i_heart i_heart2" src="images/common/icon_heart.png">
+                        <img class="i_heart i_heart3" src="images/common/icon_heart.png">
+                        <img class="i_heart i_heart4" src="images/common/icon_heart.png">
+                        <img class="i_heart i_heart5" src="images/common/icon_heart.png">
+                        <img class="i_heart i_heart6" src="images/common/icon_heart.png">
+                        <img class="i_heart i_heart7" src="images/common/icon_heart.png">
+                        <img class="i_heart i_heart8" src="images/common/icon_heart.png">
+                        <img class="i_heart i_heart6" src="images/common/icon_heart.png">
+                        <img class="i_heart i_heart7" src="images/common/icon_heart.png">
+                        <img class="i_heart i_heart8" src="images/common/icon_heart.png">
+                        <img class="i_heart i_heart9" src="images/common/icon_heart.png">
+                    </div>
                 </div>
             </div>
         </section>
+        <section class="commonPage barragePage" id="barragePage">
+            <div class="axisBox">
+                <img src="images/barrage/b1.png" alt="" class="item">
+                <img src="images/barrage/b2.png" alt="" class="item">
+                <img src="images/barrage/b3.png" alt="" class="item">
+                <img src="images/barrage/b4.png" alt="" class="item">
+                <img src="images/barrage/b5.png" alt="" class="item">
+                <img src="images/barrage/b6.png" alt="" class="item">
+                <img src="images/barrage/b7.png" alt="" class="item">
+                <img src="images/barrage/b8.png" alt="" class="item">
+                <img src="images/barrage/b9.png" alt="" class="item">
+                <img src="images/barrage/b10.png" alt="" class="item">
+                <img src="images/barrage/b11.png" alt="" class="item">
+                <img src="images/barrage/b12.png" alt="" class="item">
+            </div>
+        </section>
+        <section class="commonPage owerHoneyedPage" id="owerHoneyedPage">
+            <div class="borderBox">
+                <div class="insetBox">
+                    <div class="close"></div>
+                    <div class="logo"></div>
+                    <div class="titleBox">
+                        <div class="top">
+                            <img src="images/package/p1_tit.png" alt="" class="p_tit">
+                        </div>
+                        <div class="bottom">
+                            <img src="images/package/p1_txt.png" alt="" class="p_txt">
+                        </div>
+                    </div>
+                    <div class="recommendBox">
+                        <div class="tit2"></div>
+                        <div class="boxCon">
+                            <img src="images/package/p1.png" alt="" class="p_box">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="commonPage buyPage" id="buyPage">
+            <div class="borderBox">
+                <div class="insetBox">
+                    <div class="logo"></div>
+                    <div class="titleBox">
+                        <div class="top"></div>
+                    </div>
+                    <div class="recommendBox">
+                        <div class="boxCon">
+                            <img src="images/package/p1.png" alt="" class="p_box">
+                        </div>
+                        <div class="tit2"></div>
+                    </div>
+                    <div class="btnBox">
+                        <div class="btn btnShare"></div>
+                        <div class="btn btnBuy"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="commonPage sharePage" id="sharePage">
+            <div class="borderBox canvasBox" id="imgCanvas">
+                <img src="images/index/border.png" alt="" class="bg">
+                <div class="insetBox">
+                    <img src="images/index/logo.png" alt="" class="logo">
+                    <div class="titleBox">
+                        <img src="images/index/titBorder2.png" alt="" class="top">
+                    </div>
+                    <div class="recommendBox">
+                        <div class="boxCon">
+                            <img src="images/package/p1.png" alt="" class="p_box">
+                        </div>
+                        <img src="images/index/tit4.png" alt="" class="tit2">
+                    </div>
+                    <div class="codeBox">
+                        <img src="images/index/code.png" class="code">
+                    </div>
+                </div>
+            </div>
+            <div class="borderBox">
+                <div class="insetBox">
+                    <div class="logo"></div>
+                    <div class="titleBox">
+                        <div class="top"></div>
+                    </div>
+                    <div class="recommendBox">
+                        <div class="boxCon">
+                            <img src="images/package/p1.png" alt="" class="p_box">
+                        </div>
+                        <div class="tit2"></div>
+                    </div>
+                    <div class="codeBox">
+                        <img src="images/index/code.png" class="code">
+                        <img src="images/index/tipSave.png" class="tipSave">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="imgCombine" id="imgContent"></section>
     </article>
     <!--------------------------------------------------------------javascript区域-------------------------------------------------------------------------------------->
     <script src="js/base/framwork.js"></script>
+    <script src="js/canvas/html2canvas.min.js"></script>
+    <script src="js/base/audio.js"></script>
+    <script src="js/base/tweenmax.js"></script>
     <script src="js/base/monitor.js"></script>
     <script src="js/base/swiper.min.js"></script>
     <script src="js/API.js?v=1"></script>
     <script>
-    ibase.load('js/index.js');
+        ibase.load('js/index.js');
     </script>
 </body>
 
