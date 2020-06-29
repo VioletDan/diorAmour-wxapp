@@ -1,0 +1,10 @@
+<view class="modalBox {{showHome ? 'modalBox_show' : ''}}">
+  <image class="bg" src="/images/index/langBg.jpg" mode="aspectFill"></image>
+  <view class="videoBox">
+      <image class="btnPlay" src="/images/common/icon_play.png" catchtap="btnActClick"></image>
+  </view>
+  <view class="btnBox">
+    <image class="btn btnBuy" src="/images/index/btn_buy.png" catchtap="btnBuyClick"></image>
+    <image class="btn btnAct" src="/images/index/btn_act.png" catchtap="btnActClick"></image>
+  </view>
+</view>

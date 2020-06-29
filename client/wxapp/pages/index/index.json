@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "landing": "/components/landing/landing",
+    "home": "/components/home/home"
+  }
+}
