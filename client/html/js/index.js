@@ -165,84 +165,70 @@ $(document).ready(function () {
   }
 
   /**弹幕动画 */
+  var leafShell=$('#axisBox');
+  var leafBody=leafShell.children();
+  var leafChd;
+  var leafMax = 23;
+  var leafNow=0;
+	var leafOut=0;
+	var leafTween=[];
+  var leafList = [];
+  var axiosArr = [];
+  
   function initBarrageAni() {
-    // initOwerHoneyedPage();
-    // return
-    // var box = $('#barragePage .item');
-    // TweenMax.staggerTo(box, 1, { y:100}, 0.5);
-    var html = '',html2 = '',html3 = '';
-    var axiosArr = [];
-    var axiosObj = {
-      x: 0,
-      y: 0,
-      x2: 0,
-      y2: 0,
-      x3: 0,
-      y3: 0,
-      scaleNum:0
-    };
-    for (var index = 0; index < 12; index++) {
-      axiosObj.x = imath.randomRange(-35, 10);
-      axiosObj.y = index === 0 ? imath.randomRange(0, 15) : axiosArr[index - 1].y + 42 + imath.randomRange(20, 40);
-      axiosObj.x2 = imath.randomRange(-35,0);
-      axiosObj.y2 = index === 0 ? imath.randomRange(0, 45) : axiosArr[index - 1].y + 42 + imath.randomRange(40, 60);
-      axiosObj.x3 = imath.randomRange(0,300);
-      axiosObj.y3 = index === 0 ? imath.randomRange(0, 55) : axiosArr[index - 1].y + 42 + imath.randomRange(60, 80);
+    for (var i = 0; i < 23; i++) leaf_creat(i);
+    leafChd = leafBody.children();
+    setTimeout(function (param) {
       var num22 = Math.random();
-      axiosObj.scaleNum = num22 >= 0.6 ? num22 : num22 + 0.4;
-      console.log(axiosObj.scaleNum)
-      axiosArr.push({
-        x: axiosObj.x,
-        y: axiosObj.y,
-        x2: axiosObj.x2,
-        y2: axiosObj.y2,
-        x3: axiosObj.x3,
-        y3: axiosObj.y3,
-        scaleNum:axiosObj.scaleNum
-      })
-      html += '<img src="images/barrage/b' + (index + 1) + '.png" class="item" style="left:' + axiosObj.x + 'px;top:' + axiosObj.y + 'px;transform:scale('+(axiosObj.scaleNum)+');">';
-      html2 += '<img src="images/barrage/b' + (12 - index) + '.png" class="item" style="right:' + axiosObj.x2 + 'px;top:' + axiosObj.y2 + 'px;transform:scale('+axiosObj.scaleNum+');">';
-      html3 += '<img src="images/barrage/b' + imath.randomRange(1,12) + '.png" class="item" style="left:' + axiosObj.x3 + 'px;top:' + axiosObj.y3 + 'px;transform:scale('+axiosObj.scaleNum+');">';
-    }
-    $('#axisBox .box1').html(html);
-    $('#axisBox .box2').html(html2);
-    $('#axisBox .box3').html(html3);
-    var tl = new TimelineLite();
-    tl
-      .staggerFrom($('#axisBox .box1 .item'), 0.5, {
-        scale: [0],
+      var scaleNum = num22 >= 0.8 ? num22 : num22 + 0.2;
+      var tl = new TimelineLite();
+      tl.staggerTo(leafChd, 0.5, {
+        scale: scaleNum,
         opacity: 1,
-    }, 0.2)
-      .staggerTo($('#axisBox .box1 .item'), 0.5, {
-        scale: [Math.random()],
-        z: '-100%',
-        skewX:'-30',
-        opacity: 0
-      }, 0.2);
-
-    var t2 = new TimelineLite();
-    t2
-      .staggerFrom($('#axisBox .box2 .item'), 0.5, {
-      scale: [0],
-      opacity: 1,
-      delay: 1
-    }, 0.2)
-      .staggerTo($('#axisBox .box2 .item'), 0.5, {
-        scale: [Math.random()],
+        z: -180,
+      }, 0.2)
+      .staggerTo(leafChd, 0.5, {
+        scale: 0,
         opacity: 0,
-        delay: 1
+        z: 180,
+        x:-200
       }, 0.2);
-    var t3 = new TimelineLite();
-    t3
-      .staggerFrom($('#axisBox .box3 .item'), 0.5, {
-      scale: [0],
-      opacity: 1,
-    }, 0.2)
-      .staggerTo($('#axisBox .box3 .item'), 0.5, {
-        scale: [Math.random()],
-        opacity: 0,
-      }, 0.2);
+      // TweenLite.to($('#axisBox'),1,{to})
+    }, 500)
+   
   }
+  function leaf_creat(id) {
+    var num22 = Math.random();
+    var scaleNum = num22 >= 0.6 ? num22 : num22 + 0.35;
+		var leaf=$('<div class="itemBox"><img src="images/barrage/b' + (id + 1)%leafMax + '.png" class="item"></div>').appendTo(leafBody);
+    var span = leaf.children();
+		leaf.addClass('leaf'+(imath.randomPlus()==1?'R':'L'))
+    var z = -1000;
+    var top = (id === 0 ? imath.randomRange(0, 15) : axiosArr[id - 1].top + imath.randomRange(25, 50));
+    top = top > $(window).height() ? imath.randomRange(200, $(window).height() * 0.2)*imath.randomPlus() : top;
+    if (id % 2 === 0) {
+      var css = { left: imath.randomRange(-35, 35), top: top, z: z, scale: 0, opacity:0 };
+    } else {
+      var css = { right: imath.randomRange(-35, 35), top: top, z: z, scale: 0 ,opacity:0 };
+    }
+    axiosArr.push(css);
+		var tar={opacity:1,z:10,scale: scaleNum};    
+    var speed = 0.5;
+		leafList.push(span);
+    leaf.css(css);
+    // leafTween[id] = TweenLite.to(leaf, speed, { css: tar, delay: 0, ease: Linear.easeNone, onComplete: leaf_out, onCompleteParams: [leaf], paused: true });
+  }//edn func
+
+  function leaf_out(leaf) {
+		leaf.removeClass('leafPlay').hide();
+		leafOut++;
+		if(leafOut==leafMax){
+			console.log('leaf all out');
+			leafShell.hide();
+		}//if 
+	}//edn func
+
+
 
   /**owerHoneyedPage */
   function initOwerHoneyedPage() {
