@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+    <!-- <link rel="stylesheet/less" type="text/css" href="css/barrage.less" /> -->
+    <script src="js/base/base.js"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
+    <script src="js/base/jquery.js"></script>
+    <script src="js/base/share.js?v=1"></script>
+    <script src="js/css3d.min.js"></script>
+    <script src="js/Tween.js"></script>
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js"></script> -->
+    <script>
+        ibase.init();
+        ibase.load('css/index.css');//无缓存加载文件
+    </script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <!--------------------------------------------------------------html区域-------------------------------------------------------------------------------------------->
+    <article style="display: none;">
+        <section class="commonPage initPage active" id="initPage">
+            <video id="video" src="https://uat.beats-digital.com/viola/video/v1.mp4" class="video" preload="auto"
+                x-webkit-airplay="true" webkit-playsinline="true" playsinline="" x5-video-player-type="h5"
+                x5-video-player-fullscreen="true" src="" poster="images/index/langBg.jpg"></video>
+            <div class="btn btnPlay" id="btnPlay"></div>
+            <div class="btnPointer hide" id="btnPointer">
+                <div class="box">
+                    <div class="circleBox"></div>
+                    <div class="inset"></div>
+                </div>
+                <div class="heartbox">
+                    <div class="heartcont heart_off">
+                        <img class="i_heart i_heart1" src="images/common/icon_heart.png">
+                        <img class="i_heart i_heart2" src="images/common/icon_heart.png">
+                        <img class="i_heart i_heart3" src="images/common/icon_heart.png">
+                        <img class="i_heart i_heart4" src="images/common/icon_heart.png">
+                        <img class="i_heart i_heart5" src="images/common/icon_heart.png">
+                        <img class="i_heart i_heart6" src="images/common/icon_heart.png">
+                        <img class="i_heart i_heart7" src="images/common/icon_heart.png">
+                        <img class="i_heart i_heart8" src="images/common/icon_heart.png">
+                        <img class="i_heart i_heart6" src="images/common/icon_heart.png">
+                        <img class="i_heart i_heart7" src="images/common/icon_heart.png">
+                        <img class="i_heart i_heart8" src="images/common/icon_heart.png">
+                        <img class="i_heart i_heart9" src="images/common/icon_heart.png">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="commonPage barragePage active" id="barragePage">
+            <div class="tempBox"></div>
+            <div class="axisBox" id="axisBox">
+            </div>
+        </section>
+    </article>
+    <!--------------------------------------------------------------javascript区域-------------------------------------------------------------------------------------->
+    <script src="js/base/framwork.js"></script>
+    <script src="js/canvas/html2canvas.min.js"></script>
+    <script src="js/base/audio.js"></script>
+    <script src="js/base/monitor.js"></script>
+    <script src="js/base/swiper.min.js"></script>
+    <script src="js/API.js?v=1"></script>
+    <script>
+        ibase.load('test.js');
+    </script>
+</body>
+
+</html>

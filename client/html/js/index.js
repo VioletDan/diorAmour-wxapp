@@ -10,7 +10,7 @@ $(document).ready(function () {
 
   //解锁包包
   var packageObj = {}
-  var ticketData = '',ticketSrc = '';
+  var ticketData = '', ticketSrc = '';
   var _secretkey = 'dior-test';//上传到cdn的目录名称，上线后要改为正式地址
 
   //----------------------------------------有微信授权放这里  授权完在 icom.init(init)----------------------------------------
@@ -65,12 +65,12 @@ $(document).ready(function () {
   //------------------音乐
   function sound_handler() {
     if (os.weixin) {
-        try {
-            WeixinJSBridge.invoke('getNetworkType', {},
-            sound_creat);
-        } catch(e) {
-            wx.ready(sound_creat);
-        }
+      try {
+        WeixinJSBridge.invoke('getNetworkType', {},
+          sound_creat);
+      } catch (e) {
+        wx.ready(sound_creat);
+      }
     } else sound_creat();
   } // end func
   var soundListArr = [{
@@ -79,7 +79,7 @@ $(document).ready(function () {
   function sound_creat() {
     soundList = iaudio.on(soundListArr);
   } // end func
-  
+
 
 
   //----------------------------------------页面逻辑代码----------------------------------------
@@ -90,12 +90,12 @@ $(document).ready(function () {
   function pageInit() {
     timeUplate();
     videoEnd();
-		eventInit();
+    eventInit();
     monitor_handler();
     initBarrageAni();
-	} //end func
-	
-	function eventInit() {
+  } //end func
+
+  function eventInit() {
     $('#btnPlay').on('click', btnPlayClick);
     $('#btnPointer').on('click', btnPointerClick);
     $('#owerHoneyedPage .close').on('click', function () {
@@ -110,7 +110,7 @@ $(document).ready(function () {
     //立即购买
     $('.btnBuy').on('click', btnBuyClick);
   }
-  
+
   /**即刻分享 */
   function btnShareClick() {
     $('#sharePage').addClass('active');
@@ -122,13 +122,13 @@ $(document).ready(function () {
     icom.alert('敬请期待');
   }
 
-	/**开始播放 */
+  /**开始播放 */
   function btnPlayClick() {
     setTimeout(function () {
       $('#btnPlay').fadeOut();
-    },100)
-		_video.play();
-	}
+    }, 100)
+    _video.play();
+  }
 
   /**播放动效心 */
   function btnPointerClick() {
@@ -143,17 +143,17 @@ $(document).ready(function () {
 
   /**检测视频播放时长 */
   function timeUplate() {
-    _video.addEventListener("timeupdate",function(){
+    _video.addEventListener("timeupdate", function () {
       var timeDisplay;
       //用秒数来显示当前播放进度
       timeDisplay = Math.floor(_video.currentTime);
       //当视频播放到 4s的时候做处理
-      if(timeDisplay == 4 && !isHeartAni){
+      if (timeDisplay == 4 && !isHeartAni) {
         //处理代码
         $('#btnPointer').fadeIn();
         _video.pause();
       }
-    },false);   
+    }, false);
   }
 
   /**检测视频播放完毕 */
@@ -161,72 +161,74 @@ $(document).ready(function () {
     _video.addEventListener('ended', function () {
       //结束
       $('#buyPage').addClass('active');
-    }, false);
+    }, false);
   }
 
   /**弹幕动画 */
-  var leafShell=$('#axisBox');
-  var leafBody=leafShell.children();
+  var leafShell = $('#axisBox');
+  var leafBody1 = leafShell.children('.box1');
+  var leafBody2 = leafShell.children('.box2');
+  var leafBody3 = leafShell.children('.box3');
+  var leafBody4 = leafShell.children('.box4');
   var leafChd;
   var leafMax = 23;
-  var leafNow=0;
-	var leafOut=0;
-	var leafTween=[];
-  var leafList = [];
   var axiosArr = [];
-  
-  function initBarrageAni() {
-    for (var i = 0; i < 23; i++) leaf_creat(i);
-    leafChd = leafBody.children();
-    setTimeout(function (param) {
-      var num22 = Math.random();
-      var scaleNum = num22 >= 0.8 ? num22 : num22 + 0.2;
-      var tl = new TimelineLite();
-      tl.staggerTo(leafChd, 0.5, {
-        scale: scaleNum,
-        opacity: 1,
-        z: -180,
-      }, 0.2)
-      .staggerTo(leafChd, 0.5, {
-        scale: 0,
-        opacity: 0,
-        z: 180,
-        x:-200
-      }, 0.2);
-      // TweenLite.to($('#axisBox'),1,{to})
-    }, 500)
-   
-  }
-  function leaf_creat(id) {
-    var num22 = Math.random();
-    var scaleNum = num22 >= 0.6 ? num22 : num22 + 0.35;
-		var leaf=$('<div class="itemBox"><img src="images/barrage/b' + (id + 1)%leafMax + '.png" class="item"></div>').appendTo(leafBody);
-    var span = leaf.children();
-		leaf.addClass('leaf'+(imath.randomPlus()==1?'R':'L'))
-    var z = -1000;
-    var top = (id === 0 ? imath.randomRange(0, 15) : axiosArr[id - 1].top + imath.randomRange(25, 50));
-    top = top > $(window).height() ? imath.randomRange(200, $(window).height() * 0.2)*imath.randomPlus() : top;
-    if (id % 2 === 0) {
-      var css = { left: imath.randomRange(-35, 35), top: top, z: z, scale: 0, opacity:0 };
-    } else {
-      var css = { right: imath.randomRange(-35, 35), top: top, z: z, scale: 0 ,opacity:0 };
-    }
-    axiosArr.push(css);
-		var tar={opacity:1,z:10,scale: scaleNum};    
-    var speed = 0.5;
-		leafList.push(span);
-    leaf.css(css);
-    // leafTween[id] = TweenLite.to(leaf, speed, { css: tar, delay: 0, ease: Linear.easeNone, onComplete: leaf_out, onCompleteParams: [leaf], paused: true });
-  }//edn func
 
-  function leaf_out(leaf) {
-		leaf.removeClass('leafPlay').hide();
-		leafOut++;
-		if(leafOut==leafMax){
-			console.log('leaf all out');
-			leafShell.hide();
-		}//if 
-	}//edn func
+  function initBarrageAni() {
+    // initGirds();
+  }
+  function initGirds() {
+    var screenWidth = $(window).width();
+    var screenHeight = $(window).height();
+    var bItemW = $('section.barragePage .tempBox').width() / 1.5;
+    var bItemH = $('section.barragePage .tempBox').height();
+    //列
+    var bcolumn = 2;
+    //行
+    var brow = parseInt(screenHeight / bItemH);
+    var gridSpace1 = 25;
+    var gridSpace2 = 35;
+    /**创建网格 */
+    for (var i = 0; i < brow; i++) {
+      for (var j = 0; j < bcolumn; j++) {
+        axiosArr.push({
+          x: Math.ceil(j * bItemW + j * gridSpace1),
+          y: Math.ceil(i * bItemH + i * gridSpace2)
+        })
+      }
+    }
+    //打散数组
+    dealLeaf(1);
+    dealLeaf(2);
+    dealLeaf(3);
+    dealLeaf(4);
+  }
+  function dealLeaf(type) {
+    axiosArr.sort(function () {
+      return 0.5 - Math.random();
+    });
+    for (var i = 0; i < axiosArr.length; i++) leaf_creat(i, type);
+  }
+  function leaf_creat(id, type) {
+    var num22 = Math.random();
+    var scaleNum = num22 >= 0.6 ? num22 : num22 + 0.2;
+    var css = { left: axiosArr[id].x, top: axiosArr[id].y, scale: 1};
+    switch (type) {
+      case 1:
+        var leaf = $('<div class="itemBox itemBox' + (id + 1) + '"><img src="images/barrage/b' + (id) % leafMax + '.png" class="item"></div>').appendTo(leafBody1);
+        break;
+      case 2:
+        var leaf = $('<div class="itemBox itemBox' + (id + 1) + '"><img src="images/barrage/b' + (id) % leafMax + '.png" class="item"></div>').appendTo(leafBody2);
+        break;
+      case 3:
+        var leaf = $('<div class="itemBox itemBox' + (id + 1) + '"><img src="images/barrage/b' + (id) % leafMax + '.png" class="item"></div>').appendTo(leafBody3);
+        break;
+      case 4:
+        var leaf = $('<div class="itemBox itemBox' + (id + 1) + '"><img src="images/barrage/b' + (id) % leafMax + '.png" class="item"></div>').appendTo(leafBody4);
+        break;
+    }
+    leaf.css(css);
+  }//edn func
 
 
 
@@ -244,10 +246,10 @@ $(document).ready(function () {
     $('.p_tit').attr('src', packageObj.title);
     $('.p_txt').attr('src', packageObj.txt);
     $('.p_box').attr('src', packageObj.box);
-    if (num == 1) {
-      $('.p_box').parent('.boxCon').addClass('boxCon1');
+    if ((num == 4 || num == 6)) {
+      $('.p_box').parent('.boxCon').addClass('boxCon4');
     } else {
-      $('.p_box').parent('.boxCon').removeClass('boxCon1');
+      $('.p_box').parent('.boxCon').removeClass('boxCon4');
     }
     $('#owerHoneyedPage').addClass('active');
   }
@@ -264,7 +266,7 @@ $(document).ready(function () {
     }).then(canvas => {
       var base = canvas.toDataURL('image/jpeg', 1);
       var img = new Image();
-      img.onload = function() {
+      img.onload = function () {
         $('<img src="' + base + '">').appendTo($('#imgContent'));
         console.log('合并完成');
         loadBox.hide();
@@ -283,7 +285,7 @@ $(document).ready(function () {
   } // edn func
 
   function base64_send(data, callback, secretkey) {
-    $.post(apirul, { data: data, key: secretkey }, function(resp) {
+    $.post(apirul, { data: data, key: secretkey }, function (resp) {
       var resp = JSON.parse(resp);
       if (resp.errcode == 0) {
         callback(resp.result);
