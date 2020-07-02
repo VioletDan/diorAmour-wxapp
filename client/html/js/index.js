@@ -175,7 +175,7 @@ $(document).ready(function () {
   var axiosArr = [];
 
   function initBarrageAni() {
-    // initGirds();
+    initGirds();
   }
   function initGirds() {
     var screenWidth = $(window).width();
