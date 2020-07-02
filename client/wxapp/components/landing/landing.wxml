@@ -1,4 +1,0 @@
-<view class="modalBox {{showLand ? 'modalBox_show' : ''}}">
-  <image class="bg" src="/images/index/langBg.jpg" mode="aspectFill"></image>
-  <image class="btnJump" src="/images/index/btn_jump.png" catchtap="btnJumpClick"></image>
-</view>
