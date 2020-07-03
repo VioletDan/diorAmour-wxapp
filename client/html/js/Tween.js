@@ -3,7 +3,7 @@
  * https://github.com/sole/tween.js
  * ----------------------------------------------
  *
- * See https://github.com/sole/tween.js/graphs/contributors for the full list of contributors.
+ * See https://github.com/sole/tween.js/graphs/contribuInterpolationrs for the full list of contributors.
  * Thank you all, you're awesome!
  */
 

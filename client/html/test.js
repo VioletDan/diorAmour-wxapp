@@ -72,8 +72,9 @@ $(document).ready(function () {
     s = new C3D.Stage()
     s.size(window.innerWidth, window.innerHeight).material({
       color: 'transparent'
-    }).update()
-    $('#axisBox').html(s.el)
+    }).id('Box')
+      .update()
+    $('#axisBox').append(s.el)
 
     // 创建一个三维容器(创建以方便分组使用)
     var sp = new C3D.Sprite()
@@ -87,21 +88,20 @@ $(document).ready(function () {
       var x = Math.random() * 500 - 250
       var y = Math.random() * 500 - 250
       var z = Math.random() * 500 - 250
-      var size = 50
 
       // 装图片的容器
-      pBox.size(size)
+      pBox
         .position(x, y, z)
         .update()
 
-      // 图片容器
+      // 图片容器planeListW[(i) % leafMax] * 42 / 83, 42
       p.size(planeListW[(i) % leafMax] * 42 / 83, 42)
         .position(0, 0, 0)
         .material({
           // color: C3D.getRandomColor()
-          image: 'images/barrage/b' + (i) % leafMax + '.png'
+          image: 'images/barrage/b' + (i) % leafMax + '.png',
+          size: 'cover'
         })
-        .scale(0)
         .update()
 
       sp.addChild(pBox)
@@ -139,64 +139,71 @@ $(document).ready(function () {
       var i, len = planeList.length
       for (i = 0; i < len; i++) {
         (function (index) {
-          setTimeout(function () {
-            tweenPlane(planeList[index])
-          }, Math.floor(Math.random() * 500) + 500)
+          tweenPlane(planeList[index], index)
         })(i)
       }
     }
-    function tweenPlane (plane) {
-      var obj = {scale: 0}
-      // var time = Math.floor(Math.random() * 3000) + 100
-      var tween = new TWEEN.Tween(obj)
-        .to({scale: (Math.random()),opacity: 1}, 400)
-        .onUpdate(function () {
-          plane.scale(this.scale).update()
-        })
-        .onComplete(function () {
-          var scaleV = Math.random() * 0.5 + 0.25
-          obj = {scale: (Math.random() * 0.5)}
-          var tween = new TWEEN.Tween(obj)
-            .to({scale: scaleV}, 400)
-            .repeat(1)
-            .yoyo(true)
-            .onUpdate(function () {
-              plane.scale(this.scale).update()
-            })
-            .onComplete(function () {})
-            .start()
-        })
-        .start()
+    function tweenPlane (plane, index) {
+      JT.from(plane, 1, {
+        x: 0,
+        z: 0,
+        scaleX: .01,
+        scaleY: .01,
+        scaleZ: .01,
+        delay: .05 * index,
+        ease: JT.Quad.Out,
+        onUpdate: function () {
+          this.target.updateT()
+        },
+        onStart: function () {
+          this.target.visibility({
+            alpha: 1
+          }).updateV()
+        },
+        onEnd() {
+          JT.to(this.target, 1, {
+            alpha: 0,
+            scaleX: .01,
+            scaleY: .01,
+            scaleZ: .01,
+            delay: .05 * index,
+            ease: JT.Quad.Out,
+            onUpdate: function () {
+              this.target.updateT()
+            }
+          })
+        }
+      })
     }
     // ==================== aniSky ====================
     function aniSky () {
-      var obj = {rotationX: 0,rotationY: 0, rotationZ: 0}
-      var tween = new TWEEN.Tween(obj)
-        .to({rotationY: -360}, 3000)
-        .repeat(1)
-        .onUpdate(function () {
-          sp.rotation(this.rotationX, this.rotationY, this.rotationZ).update()
-        })
-        .onComplete(function () {})
-        .start()
+      JT.to(sp, 2, {
+        rotationY: -360,
+        delay: 3,
+        repeat:1,
+        onUpdate: function () {
+          this.target.updateT().updateV()
+        }, onEnd: function () {
+          this.target.updateT().updateV()
+          $('#axisBox').fadeOut()
+        }
+      })
     }
     function aniPBox () {
       var i, len = pBoxList.length
       for (i = 0; i < len; i++) {
-        (function (pBox) {
-          var obj = { rotationX: 0, rotationY: 0, rotationZ: 0 }
-          var scaleV = Math.random() * 0.5 + 0.25
-          var tween = new TWEEN.Tween(obj)
-            .to({ rotationY: 360, scale: scaleV}, 3000)
-            .repeat(1)
-            .onUpdate(function () {
-              pBox.rotation(this.rotationX, this.rotationY, this.rotationZ).update()
-            })
-            .onComplete(function () {
-              // $('#axisBox').fadeOut()
-            })
-            .start()
-        })(pBoxList[i])
+        (function (pBox, i) {
+          JT.to(pBox, 2, {
+            rotationY: 360,
+            delay: 3,
+            repeat:1,
+            onUpdate: function () {
+              this.target.updateT().updateV()
+            }, onEnd: function () {
+              this.target.updateT().updateV()
+            }
+          })
+        })(pBoxList[i], i)
       }
     }
     // ==================== aniSky ====================
@@ -207,7 +214,7 @@ $(document).ready(function () {
 
       requestAnimationFrame(go)
 
-      TWEEN.update(time)
+    // TWEEN.update(time)
     }
 
     // =================
