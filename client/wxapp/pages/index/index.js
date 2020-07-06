@@ -20,7 +20,7 @@ Page({
     $page = this;
     $query = option;
     console.log('getQueryString', option);
-    // app.initApp();
+    app.initApp();
   },
   onReady: function () {
   }, //监听页面初次渲染完成

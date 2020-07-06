@@ -58,7 +58,7 @@ App({
   async initApp(cb) {
     if (this.data.session_key == '' || first) {
       first = false;
-      await this.AppletLogin(cb);
+      // await this.AppletLogin(cb);
     }
     let pages = getCurrentPages();
     let page = pages[pages.length - 1];
@@ -69,6 +69,7 @@ App({
   async AppletLogin(cb) {
     const login = promisify(wx.login);
     let { code } = await login();
+    console.log(code)
     let res = await this.API.AppletLogin({ code: code })
     if (res.error == 0) {
       this.data.openid = res.data.openid

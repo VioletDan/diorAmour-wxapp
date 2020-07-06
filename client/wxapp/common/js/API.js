@@ -46,7 +46,10 @@ class API {
 
   // 授权
   async AppletLogin(data) {
-    return this._send('getLoginByCode', data, 'POST');
+    return {
+      error:1
+    }
+    // return this._send('getLoginByCode', data, 'POST');
   }
 
   // 获取个人信息
