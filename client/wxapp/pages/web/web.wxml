@@ -1,2 +1,2 @@
 <!--pages/web/web.wxml-->
-<web-view src="https://www.martell.com/en-ww/"></web-view>
+<web-view src="https://uat.beats-digital.com/viola/diorAmour/index.html?debug=1"></web-view>

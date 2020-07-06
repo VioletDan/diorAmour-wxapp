@@ -10,11 +10,6 @@
     "navigationBarTitleText": "迪奥情人节互动",
     "navigationBarTextStyle": "black"
   },
-  "navigateToMiniProgramAppIdList": [
-    "wxd4ce61a2d6a1afab",
-    "wxd4ce61a2d6a1afab",
-    "wx240696d46c9671d7"
-  ],
   "usingComponents": {
     "auth": "/components/auth/auth"
   },

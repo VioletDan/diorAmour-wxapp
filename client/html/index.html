@@ -12,12 +12,19 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <link rel="stylesheet" type="text/css" href="css/common.css" />
-    <!-- <link rel="stylesheet/less" type="text/css" href="css/barrage.less" /> -->
     <script src="js/base/base.js"></script>
     <script src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
     <script src="js/base/jquery.js"></script>
     <script src="js/base/share.js?v=1"></script>
-    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js"></script> -->
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?e145aceb8c1c8e6a26ed84fa964209f2";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
     <script>
         ibase.init();
         ibase.load('css/index.css');//无缓存加载文件
@@ -30,8 +37,11 @@
         <section class="commonPage initPage active" id="initPage">
             <video id="video" src="https://uat.beats-digital.com/viola/video/v1.mp4" class="video" preload="auto"
                 x-webkit-airplay="true" webkit-playsinline="true" playsinline="" x5-video-player-type="h5"
-                x5-video-player-fullscreen="true" src="" poster="images/index/langBg.jpg"></video>
-            <div class="btn btnPlay" id="btnPlay"></div>
+                x5-video-player-fullscreen="true" src="" poster=""></video>
+            <div class="poster" id="poster">
+                <img src="images/index/langBg.jpg" alt="">
+                <div class="btn btnPlay" id="btnPlay"></div>
+            </div>
             <div class="btnPointer hide" id="btnPointer">
                 <div class="box">
                     <div class="circleBox"></div>
@@ -148,9 +158,10 @@
     </article>
     <!--------------------------------------------------------------javascript区域-------------------------------------------------------------------------------------->
     <script src="js/base/framwork.js"></script>
+    <script src="js/css3d.min.js"></script>
+    <script src="js/canvas/jstween.min.js"></script>
     <script src="js/canvas/html2canvas.min.js"></script>
     <script src="js/base/audio.js"></script>
-    <script src="js/base/tweenmax.js"></script>
     <script src="js/base/monitor.js"></script>
     <script src="js/base/swiper.min.js"></script>
     <script src="js/API.js?v=1"></script>

@@ -13,6 +13,12 @@ $(document).ready(function () {
   var ticketData = '', ticketSrc = '';
   var _secretkey = 'dior-test';//上传到cdn的目录名称，上线后要改为正式地址
 
+  //弹幕动画
+  var leafMax = 23
+  var pBoxList = []
+  var planeList = []
+  var planeListW = [146, 309, 309, 408, 283, 241, 376, 265, 322, 390, 322, 343, 246, 245, 245, 245, 245, 194, 224, 146, 381, 381, 272, 146]
+  var s;
   //----------------------------------------有微信授权放这里  授权完在 icom.init(init)----------------------------------------
 
   icom.init(init); //初始化
@@ -92,7 +98,6 @@ $(document).ready(function () {
     videoEnd();
     eventInit();
     monitor_handler();
-    initBarrageAni();
   } //end func
 
   function eventInit() {
@@ -115,19 +120,23 @@ $(document).ready(function () {
   function btnShareClick() {
     $('#sharePage').addClass('active');
     setTimeout(image_combine, 1500);
+    imonitor.add({ category: 'button', label: '即刻分享' }); // 监测
+    imonitor.add({category: '虚拟页面', label: '即刻分享页'}); // 监测
   }
 
   /**立即购买 */
   function btnBuyClick() {
     icom.alert('敬请期待');
+    imonitor.add({ category: 'button', label: '立即购买' }); // 监测
   }
 
   /**开始播放 */
   function btnPlayClick() {
     setTimeout(function () {
-      $('#btnPlay').fadeOut();
+      $('#poster').fadeOut();
     }, 100)
     _video.play();
+    imonitor.add({ category: 'button', label: '开始播放' }); // 监测
   }
 
   /**播放动效心 */
@@ -136,9 +145,10 @@ $(document).ready(function () {
     $('.heartbox').css({ opacity: 1 }).children('.heartcont').addClass('heart_on');
     setTimeout(function () {
       $('#btnPointer').fadeOut();
-      // $('#barragePage').addClass('active');
+      $('#barragePage').addClass('active');
       initBarrageAni();
-    }, 2500);
+    }, 2200);
+    imonitor.add({ category: 'button', label: '点击触点' }); // 监测
   }
 
   /**检测视频播放时长 */
@@ -161,78 +171,171 @@ $(document).ready(function () {
     _video.addEventListener('ended', function () {
       //结束
       $('#buyPage').addClass('active');
+      imonitor.add({category: '虚拟页面', label: '立即购买/即刻分享页'}); // 监测
     }, false);
   }
 
   /**弹幕动画 */
-  var leafShell = $('#axisBox');
-  var leafBody1 = leafShell.children('.box1');
-  var leafBody2 = leafShell.children('.box2');
-  var leafBody3 = leafShell.children('.box3');
-  var leafBody4 = leafShell.children('.box4');
-  var leafChd;
-  var leafMax = 23;
-  var axiosArr = [];
-
   function initBarrageAni() {
-    initGirds();
+    initAni()
   }
-  function initGirds() {
-    var screenWidth = $(window).width();
-    var screenHeight = $(window).height();
-    var bItemW = $('section.barragePage .tempBox').width() / 1.5;
-    var bItemH = $('section.barragePage .tempBox').height();
-    //列
-    var bcolumn = 2;
-    //行
-    var brow = parseInt(screenHeight / bItemH);
-    var gridSpace1 = 25;
-    var gridSpace2 = 35;
-    /**创建网格 */
-    for (var i = 0; i < brow; i++) {
-      for (var j = 0; j < bcolumn; j++) {
-        axiosArr.push({
-          x: Math.ceil(j * bItemW + j * gridSpace1),
-          y: Math.ceil(i * bItemH + i * gridSpace2)
+  function initAni () {
+    // 创建场景
+    s = new C3D.Stage()
+    s.size(window.innerWidth, window.innerHeight).material({
+      color: 'transparent'
+    }).id('Box')
+      .update()
+    $('#axisBox').append(s.el)
+
+    // 创建一个三维容器(创建以方便分组使用)
+    var sp = new C3D.Sprite()
+    sp.position(0, 0, -500)
+    s.addChild(sp)
+
+    // 创建60个平面放入容器，并定义鼠标事件
+    for (var i = 0; i < 60; i++) {
+      var pBox = new C3D.Sprite()
+      var p = new C3D.Plane()
+      var x = Math.random() * 500 - 250
+      var y = Math.random() * 500 - 250
+      var z = Math.random() * 500 - 250
+
+      // 装图片的容器
+      pBox
+        .position(x, y, z)
+        .update()
+
+      // 图片容器planeListW[(i) % leafMax] * 42 / 83, 42
+      p.size(planeListW[(i) % leafMax] * 42 / 83, 42)
+        .position(0, 0, 0)
+        .material({
+          // color: C3D.getRandomColor()
+          image: 'images/barrage/b' + (i) % leafMax + '.png',
+          size: 'cover'
         })
+        .scale(0.75)
+        .update()
+
+      sp.addChild(pBox)
+      pBox.addChild(p)
+
+      pBoxList.push(pBox)
+      planeList.push(p)
+    }
+
+    // 响应屏幕调整尺寸
+    function resize () {
+      s.size(window.innerWidth, window.innerHeight).update()
+    }
+    window.onresize = function () {
+      resize()
+    }
+    resize()
+
+    // 刷新场景
+    requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || window.oRequestAnimationFrame ||
+    function (callback) {
+      setTimeout(callback, 1000 / 60)
+    }
+
+    function aniStart () {
+      aniPlane()
+      setTimeout(function () {
+        aniPBox()
+        aniSky()
+      }, 0)
+    }
+
+    // ==================== aniPlane ====================
+    function aniPlane () {
+      var i, len = planeList.length
+      for (i = 0; i < len; i++) {
+        (function (index) {
+          tweenPlane(planeList[index], index)
+        })(i)
       }
     }
-    //打散数组
-    dealLeaf(1);
-    dealLeaf(2);
-    dealLeaf(3);
-    dealLeaf(4);
-  }
-  function dealLeaf(type) {
-    axiosArr.sort(function () {
-      return 0.5 - Math.random();
-    });
-    for (var i = 0; i < axiosArr.length; i++) leaf_creat(i, type);
-  }
-  function leaf_creat(id, type) {
-    var num22 = Math.random();
-    var scaleNum = num22 >= 0.6 ? num22 : num22 + 0.2;
-    var css = { left: axiosArr[id].x, top: axiosArr[id].y, scale: 1};
-    switch (type) {
-      case 1:
-        var leaf = $('<div class="itemBox itemBox' + (id + 1) + '"><img src="images/barrage/b' + (id) % leafMax + '.png" class="item"></div>').appendTo(leafBody1);
-        break;
-      case 2:
-        var leaf = $('<div class="itemBox itemBox' + (id + 1) + '"><img src="images/barrage/b' + (id) % leafMax + '.png" class="item"></div>').appendTo(leafBody2);
-        break;
-      case 3:
-        var leaf = $('<div class="itemBox itemBox' + (id + 1) + '"><img src="images/barrage/b' + (id) % leafMax + '.png" class="item"></div>').appendTo(leafBody3);
-        break;
-      case 4:
-        var leaf = $('<div class="itemBox itemBox' + (id + 1) + '"><img src="images/barrage/b' + (id) % leafMax + '.png" class="item"></div>').appendTo(leafBody4);
-        break;
+    function tweenPlane (plane, index) {
+      JT.from(plane, 1, {
+        x: 0,
+        z: 0,
+        scaleX: .01,
+        scaleY: .01,
+        scaleZ: .01,
+        delay: .05 * index,
+        ease: JT.Quad.Out,
+        onUpdate: function () {
+          this.target.updateT()
+        },
+        onStart: function () {
+          this.target.visibility({
+            alpha: 1
+          }).updateV()
+        },
+        onEnd() {
+          JT.to(this.target, 1, {
+            alpha: 0,
+            scaleX: 0,
+            scaleY: 0,
+            scaleZ: 0,
+            x: -2.5 * index,
+            y:-2.5 * index,
+            delay: .05 * index,
+            ease: JT.linear,
+            onUpdate: function () {
+              this.target.updateT()
+            }
+          })
+        }
+      })
     }
-    leaf.css(css);
-  }//edn func
+    // ==================== aniSky ====================
+    function aniSky () {
+      JT.to(sp, 2, {
+        rotationY: -360,
+        delay: 2.5,
+        repeat: 2,
+        ease: JT.linear,
+        onUpdate: function () {
+          this.target.updateT().updateV()
+        }, onEnd: function () {
+          this.target.updateT().updateV()
+          $('#axisBox').fadeOut();
+          initOwerHoneyedPage();
+        }
+      })
+    }
+    function aniPBox () {
+      var i, len = pBoxList.length
+      for (i = 0; i < len; i++) {
+        (function (pBox, i) {
+          JT.to(pBox, 2, {
+            rotationY: 360,
+            delay: 2.5,
+            repeat: 2,
+            ease: JT.linear,
+            onUpdate: function () {
+              this.target.updateT().updateV()
+            }, onEnd: function () {
+              this.target.updateT().updateV()
+            }
+          })
+        })(pBoxList[i], i)
+      }
+    }
+    // ==================== aniSky ====================
+
+    function go (time) {
+      requestAnimationFrame(go)
+    }
+    // =================
+    go()
+    aniStart();
+  }
 
 
-
-  /**owerHoneyedPage */
+  /**解谜产品*/
   function initOwerHoneyedPage() {
     if (!window.localStorage.packageNum) {
       var num = imath.randomRange(1, 6);
@@ -251,7 +354,9 @@ $(document).ready(function () {
     } else {
       $('.p_box').parent('.boxCon').removeClass('boxCon4');
     }
+    soundList.soundTimer.play();
     $('#owerHoneyedPage').addClass('active');
+    imonitor.add({category: '虚拟页面', label: '互动结果页'}); // 监测
   }
 
 

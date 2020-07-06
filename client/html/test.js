@@ -78,7 +78,7 @@ $(document).ready(function () {
 
     // 创建一个三维容器(创建以方便分组使用)
     var sp = new C3D.Sprite()
-    sp.position(0, 0, -300)
+    sp.position(0, 0, -500)
     s.addChild(sp)
 
     // 创建60个平面放入容器，并定义鼠标事件
@@ -102,6 +102,7 @@ $(document).ready(function () {
           image: 'images/barrage/b' + (i) % leafMax + '.png',
           size: 'cover'
         })
+        .scale(0.75)
         .update()
 
       sp.addChild(pBox)
@@ -163,11 +164,13 @@ $(document).ready(function () {
         onEnd() {
           JT.to(this.target, 1, {
             alpha: 0,
-            scaleX: .01,
-            scaleY: .01,
-            scaleZ: .01,
+            scaleX: 0,
+            scaleY: 0,
+            scaleZ: 0,
+            x: -2.5 * index,
+            y:-2.5 * index,
             delay: .05 * index,
-            ease: JT.Quad.Out,
+            ease: JT.linear,
             onUpdate: function () {
               this.target.updateT()
             }
@@ -179,8 +182,9 @@ $(document).ready(function () {
     function aniSky () {
       JT.to(sp, 2, {
         rotationY: -360,
-        delay: 3,
-        repeat:1,
+        delay: 2.5,
+        repeat: 2,
+        ease: JT.linear,
         onUpdate: function () {
           this.target.updateT().updateV()
         }, onEnd: function () {
@@ -195,8 +199,9 @@ $(document).ready(function () {
         (function (pBox, i) {
           JT.to(pBox, 2, {
             rotationY: 360,
-            delay: 3,
-            repeat:1,
+            delay: 2.5,
+            repeat: 2,
+            ease: JT.linear,
             onUpdate: function () {
               this.target.updateT().updateV()
             }, onEnd: function () {
